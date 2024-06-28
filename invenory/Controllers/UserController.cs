@@ -1,12 +1,8 @@
 ﻿using invenory.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using Npgsql;
-using System;
-using System.Data;
 
 namespace invenory.Controllers
 {
@@ -32,7 +28,7 @@ namespace invenory.Controllers
         public ActionResult Login( [FromBody] UserModel userModel)
         {
             var user_id = 0;
-            List<UserModel> users = new List<UserModel>();
+            //List<UserModel> users = new List<UserModel>();
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -59,7 +55,7 @@ namespace invenory.Controllers
                                 userModel.user_email = reader.GetString(2);
                                 userModel.user_password = reader.GetString(3);
 
-                                users.Add(userModel);
+                                //users.Add(userModel);
                             }
                         }
                     }
@@ -69,14 +65,14 @@ namespace invenory.Controllers
             {
                 ModelState.AddModelError("User", "it's exception: " + ex);
             }
-            if (users.Count > 0)
+            if (userModel.user_name!=null && userModel.user_email!=null)
             {
              var  token = jwt.GenerateToken(userModel);    
-                return Ok(new {message="Logged in successfully",users=users,status=StatusCodes.Status200OK,token=token});
+                return Ok(new {message="logged in successfully.",userModel,status=StatusCodes.Status200OK,token=token});
             }
             else
             {
-                return Json(new {message="You are not registered user...!!",status =StatusCodes.Status401Unauthorized,email_id=userModel.user_email,password=userModel.user_password});
+                return Json(new {message="you are not registered user.",status =StatusCodes.Status401Unauthorized,email_id=userModel.user_email,password=userModel.user_password});
             }
         }
 

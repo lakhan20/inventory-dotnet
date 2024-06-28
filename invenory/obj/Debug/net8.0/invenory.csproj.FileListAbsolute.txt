@@ -39,3 +39,4 @@ D:\webApi\invenory\invenory\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.d
 D:\webApi\invenory\invenory\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\webApi\invenory\invenory\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\webApi\invenory\invenory\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\webApi\invenory\invenory\obj\Debug\net8.0\invenory.sourcelink.json

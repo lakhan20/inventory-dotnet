@@ -18,17 +18,163 @@
   {
     "ContainingType": "invenory.Controllers.ProductController",
     "Method": "addProduct",
-    "RelativePath": "api/addProduct",
+    "RelativePath": "api/addproduct",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "product",
-        "Type": "invenory.Models.product.Product",
+        "Name": "product_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_price",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_available_qty",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_total_qty",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_mrp",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_discount",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "is_available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "is_pieces",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_images",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "user_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "subCategory_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "subCategory_name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "category_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "category_name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "created_at",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "updated_at",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "created_at_str",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "updated_at_str",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "product_image",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.SubCategoryController",
+    "Method": "addSubCategory",
+    "RelativePath": "api/addsubcategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subCategoryModel",
+        "Type": "invenory.Models.SubCategoryModel",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.CategoryController",
+    "Method": "getAllCategories",
+    "RelativePath": "api/getallcategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.ProductController",
+    "Method": "getallproducts",
+    "RelativePath": "api/getallproducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.SubCategoryController",
+    "Method": "getAllSubCategories",
+    "RelativePath": "api/getallsubcategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -48,6 +194,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "invenory.Controllers.ProductController",
+    "Method": "getProductById",
+    "RelativePath": "api/getproductbyid/{product_id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.SubCategoryController",
+    "Method": "getSubCategoryById",
+    "RelativePath": "api/getsubcategorybyid/{subCategory_id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subCategory_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "invenory.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "api/Login",
@@ -58,6 +236,85 @@
       {
         "Name": "userModel",
         "Type": "invenory.Models.UserModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.CategoryController",
+    "Method": "updateCategory",
+    "RelativePath": "api/updatecategory/{category_id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "categoryModel",
+        "Type": "invenory.Models.CategoryModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.ProductController",
+    "Method": "updateProduct",
+    "RelativePath": "api/updateproduct/{product_id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "product",
+        "Type": "invenory.Models.product.Product",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.ProductController",
+    "Method": "updateProductStatus",
+    "RelativePath": "api/updateproductstatus/{product_id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.SubCategoryController",
+    "Method": "updateSubCategory",
+    "RelativePath": "api/updatesubcategory/{subcategory_id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subcategory_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subCategoryModel",
+        "Type": "invenory.Models.SubCategoryModel",
         "IsRequired": true
       }
     ],
