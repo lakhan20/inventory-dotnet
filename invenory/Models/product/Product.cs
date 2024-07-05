@@ -28,7 +28,7 @@ namespace invenory.Models.product
         public DateTime updated_at { get; set;}
         public string created_at_str { get; set; }
         public string updated_at_str { get; set; }
-        public List<IFormFile> product_image { get; set; }
+        public IFormFile[] product_image { get; set; }
 
 
     }

@@ -125,7 +125,7 @@
       },
       {
         "Name": "product_image",
-        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile[]",
         "IsRequired": false
       }
     ],
@@ -142,6 +142,22 @@
       {
         "Name": "subCategoryModel",
         "Type": "invenory.Models.SubCategoryModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.ProductFilterController",
+    "Method": "filterByCategory",
+    "RelativePath": "api/filterByCategory/{category_id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category_id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -318,6 +334,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "invenory.Controllers.ValidateTokenController",
+    "Method": "validateToken",
+    "RelativePath": "api/validateToken",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

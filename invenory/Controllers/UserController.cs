@@ -28,6 +28,7 @@ namespace invenory.Controllers
         public ActionResult Login( [FromBody] UserModel userModel)
         {
             var user_id = 0;
+            UserModel user = new UserModel();
             //List<UserModel> users = new List<UserModel>();
             try
             {
@@ -42,18 +43,19 @@ namespace invenory.Controllers
 
                         using (var reader = command.ExecuteReader())
                         {
+                            
                             if (reader.Read())
                             {
                                 user_id = reader.GetInt32(0); // Assuming the function returns the user_id as the first field
                                 Console.WriteLine("user_id : " + user_id);
 
                                 //UserModel user = new UserModel();
-                                userModel.user_id = user_id;
+                                user.user_id = user_id;
 
                                 // Assuming these are the other fields returned by fn_login
-                                userModel.user_name = reader.GetString(1);
-                                userModel.user_email = reader.GetString(2);
-                                userModel.user_password = reader.GetString(3);
+                                user.user_name = reader.GetString(1);
+                                user.user_email = reader.GetString(2);
+                                user.user_password = reader.GetString(3);
 
                                 //users.Add(userModel);
                             }
@@ -65,14 +67,14 @@ namespace invenory.Controllers
             {
                 ModelState.AddModelError("User", "it's exception: " + ex);
             }
-            if (userModel.user_name!=null && userModel.user_email!=null)
+            if (user.user_name!="" && user.user_email!="")
             {
-             var  token = jwt.GenerateToken(userModel);    
+             var  token = jwt.GenerateToken(user);    
                 return Ok(new {message="logged in successfully.",userModel,status=StatusCodes.Status200OK,token=token});
             }
             else
             {
-                return Json(new {message="you are not registered user.",status =StatusCodes.Status401Unauthorized,email_id=userModel.user_email,password=userModel.user_password});
+                return Unauthorized(new {message="you are not registered user.",status =StatusCodes.Status401Unauthorized,email_id=userModel.user_email,password=userModel.user_password});
             }
         }
 

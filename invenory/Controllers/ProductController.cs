@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 using Npgsql;
+using System.IO;
 
 namespace invenory.Controllers
 {
@@ -21,29 +22,48 @@ namespace invenory.Controllers
             connectionString = configuration["ConnectionStrings:PostgresDb"] ?? "";
 
         }
-    
+
 
         [AllowAnonymous]
         [HttpPost]
         [Route("/api/addproduct")]
         [Authorize]
-        public  ActionResult addProduct([FromForm]Product product)
+        public ActionResult addProduct([FromForm] Product product)
         {
             int cnt = 0;
-            List<string> images= new List<string>();
+            List<string> images = new List<string>();
             var authorize = jwt.authorizeUser();
             if (authorize != null)
             {
 
                 try
                 {
+                    foreach (var item in product.product_image)
+                    {
+
+                        if (item.Length >= 51200)
+                        {
+                            return BadRequest(new { message = "Image size must be less then or equal to 50kb", status = StatusCodes.Status400BadRequest });
+                        }
+                        else if (item.ContentType != "image/png" || item.ContentType != "image/jpeg" || item.ContentType != "image/jpg")
+                        {
+                            return BadRequest(new { message = "Image file must contain jpeg or png extension", status = StatusCodes.Status400BadRequest });
+                        }
+
+                    }
 
                     foreach (var item in product.product_image)
                     {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", item.FileName+DateTime.Now);
+
+                        string renamedfile = "_" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + item.FileName;
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", renamedfile);
+
                         using (var stream = new FileStream(path, FileMode.Create))
-                             item.CopyTo(stream);
-                        images.Add(item.FileName);
+                        {
+                            item.CopyTo(stream);
+                            images.Add(renamedfile);
+                        }
+
                     }
 
                     using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -61,7 +81,7 @@ namespace invenory.Controllers
                             command.Parameters.AddWithValue("@product_discount", product.product_discount);
                             command.Parameters.AddWithValue("@is_available", product.is_available);
                             command.Parameters.AddWithValue("@is_pieces", product.is_pieces);
-                            command.Parameters.AddWithValue("@product_images", product.product_image);
+                            command.Parameters.AddWithValue("@product_images", images);
                             command.Parameters.AddWithValue("@user_id", authorize.user_id);
                             command.Parameters.AddWithValue("@subCategory_id", product.subCategory_id);
 
