@@ -33,6 +33,7 @@ namespace invenory.Controllers
             int cnt = 0;
             List<string> images = new List<string>();
             var authorize = jwt.authorizeUser();
+            string absPath = "D://angular//inventory//inventory-project//src//assets//";
             if (authorize != null)
             {
 
@@ -45,10 +46,11 @@ namespace invenory.Controllers
                         {
                             return BadRequest(new { message = "Image size must be less then or equal to 50kb", status = StatusCodes.Status400BadRequest });
                         }
-                        else if (item.ContentType != "image/png" || item.ContentType != "image/jpeg" || item.ContentType != "image/jpg")
-                        {
-                            return BadRequest(new { message = "Image file must contain jpeg or png extension", status = StatusCodes.Status400BadRequest });
-                        }
+                        
+                        //else if (item.ContentType != "image/png" || item.ContentType != "image/jpeg" || item.ContentType != "image/jpg")
+                        //{
+                        //    return BadRequest(new { message = "Image file must contain jpeg or png extension", status = StatusCodes.Status400BadRequest });
+                        //}
 
                     }
 
@@ -56,7 +58,8 @@ namespace invenory.Controllers
                     {
 
                         string renamedfile = "_" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + item.FileName;
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "uploads", renamedfile);
+                        Console.WriteLine(Directory.GetCurrentDirectory());
+                        var path = Path.Combine(absPath, "productImages", renamedfile);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
@@ -75,11 +78,11 @@ namespace invenory.Controllers
                             command.Parameters.AddWithValue("@product_name", product.product_name);
                             command.Parameters.AddWithValue("@product_description", product.product_description);
                             command.Parameters.AddWithValue("@product_price", product.product_price);
-                            command.Parameters.AddWithValue("@product_available_qty", product.product_available_qty);
+                            command.Parameters.AddWithValue("@product_available_qty", product.product_available_qty);//directly calculated
                             command.Parameters.AddWithValue("@product_total_qty", product.product_total_qty);
                             command.Parameters.AddWithValue("@product_mrp", product.product_mrp);
-                            command.Parameters.AddWithValue("@product_discount", product.product_discount);
-                            command.Parameters.AddWithValue("@is_available", product.is_available);
+                            command.Parameters.AddWithValue("@product_discount", product.product_discount);//directly calculated
+                            command.Parameters.AddWithValue("@is_available", product.is_available); // default is true
                             command.Parameters.AddWithValue("@is_pieces", product.is_pieces);
                             command.Parameters.AddWithValue("@product_images", images);
                             command.Parameters.AddWithValue("@user_id", authorize.user_id);
@@ -127,7 +130,7 @@ namespace invenory.Controllers
         public ActionResult getProductById(int product_id)
         {
 
-            Product product = new Product();
+            GetProductByIdModel product = new GetProductByIdModel();
             var authorize = jwt.authorizeUser();
             if (authorize != null)
             {
@@ -145,33 +148,33 @@ namespace invenory.Controllers
                                 if (productReader.Read())
                                 {
 
-                                    product.product_id = productReader.GetInt32(0);
-                                    product.product_name = productReader.GetString(1);
-                                    product.product_description = productReader.GetString(2);
-                                    product.product_price = productReader.GetDouble(3);
-                                    product.product_total_qty = productReader.GetDouble(4);
-                                    product.product_available_qty = productReader.GetDouble(5);
-                                    product.product_mrp = productReader.GetDouble(6);
-                                    product.product_discount = productReader.GetDouble(7);
-                                    product.is_available = productReader.GetBoolean(8);
-                                    product.is_pieces = productReader.GetBoolean(9);
+                               
+                                    product.product_name = productReader.GetString(0);
+                                    product.product_description = productReader.GetString(1);
+                                    product.product_price = productReader.GetDouble(2);
+                                    product.product_total_qty = productReader.GetDouble(3);
+                                    product.product_available_qty = productReader.GetDouble(4);
+                                    product.product_mrp = productReader.GetDouble(5);
+                                    product.product_discount = productReader.GetDouble(6);
+                                    product.is_available = productReader.GetBoolean(7);
+                                    product.is_pieces = productReader.GetBoolean(8);
 
-                                    product.product_images = productReader.GetFieldValue<string[]>(10);
+                                    product.product_images = productReader.GetFieldValue<string[]>(9);
 
 
-                                    product.subCategory_id = productReader.GetInt32(11);
-                                    product.subCategory_name = productReader.GetString(12);
-                                    product.category_id = productReader.GetInt32(13);
-                                    product.category_name = productReader.GetString(14);
+                                    product.subCategory_name = productReader.GetString(10);
+ 
+                                    product.category_name = productReader.GetString(11);
 
-                                    product.created_at = productReader.GetDateTime(15);
-                                    var frmt = product.created_at.GetDateTimeFormats();
-                                    product.created_at_str = frmt[11];
+                                    DateTime created_at = productReader.GetDateTime(12);
+                                    //product.created_at = productReader.GetDateTime(12);
+                                    var frmt = created_at.GetDateTimeFormats();
+                                    product.created_at_str = frmt[12];
                                     try
                                     {
-                                        product.updated_at = productReader.GetDateTime(16);
-                                        var frmt2 = product.updated_at.GetDateTimeFormats();
-                                        product.updated_at_str = frmt2[11];
+                                        DateTime updated_at = productReader.GetDateTime(13);
+                                        var frmt2 = updated_at.GetDateTimeFormats();
+                                        product.updated_at_str = frmt2[12];
                                     }
                                     catch
                                     {

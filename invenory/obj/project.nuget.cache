@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IscoxA+yydi4T1zn0Y61gqag5JdAlRg+4XEMSiA5P6y4cpHSZwq2BBZNDMdh9VT+xW8SSF3XWrqJM/jbIRh2dw==",
+  "dgSpecHash": "rtqILG+EZiGL05OcbFTHHB2SfGH7v83s+Ls6dAiTY2yd1LefWQiMFDdlw6ttEk3VLpNSpDaCkKqkcUYKSbz94w==",
   "success": true,
-  "projectFilePath": "D:\\webApi\\invenory\\invenory\\invenory.csproj",
+  "projectFilePath": "D:\\angular\\inventory\\invenory\\invenory\\invenory.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lakhan.thakkar\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.6\\microsoft.aspnetcore.authentication.jwtbearer.8.0.6.nupkg.sha512",
     "C:\\Users\\lakhan.thakkar\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

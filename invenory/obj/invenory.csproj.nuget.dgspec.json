@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\webApi\\invenory\\invenory\\invenory.csproj": {}
+    "D:\\angular\\inventory\\invenory\\invenory\\invenory.csproj": {}
   },
   "projects": {
-    "D:\\webApi\\invenory\\invenory\\invenory.csproj": {
+    "D:\\angular\\inventory\\invenory\\invenory\\invenory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\webApi\\invenory\\invenory\\invenory.csproj",
+        "projectUniqueName": "D:\\angular\\inventory\\invenory\\invenory\\invenory.csproj",
         "projectName": "invenory",
-        "projectPath": "D:\\webApi\\invenory\\invenory\\invenory.csproj",
+        "projectPath": "D:\\angular\\inventory\\invenory\\invenory\\invenory.csproj",
         "packagesPath": "C:\\Users\\lakhan.thakkar\\.nuget\\packages\\",
-        "outputPath": "D:\\webApi\\invenory\\invenory\\obj\\",
+        "outputPath": "D:\\angular\\inventory\\invenory\\invenory\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
